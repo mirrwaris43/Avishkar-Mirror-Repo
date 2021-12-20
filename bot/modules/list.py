@@ -15,13 +15,13 @@ def list_buttons(update, context):
     try:
         key = update.message.text.split(" ", maxsplit=1)[1]
     except IndexError:
-        return sendMessage('Send a search key along with command', context.bot, update)
+        return sendMessage('🔍 Sᴇɴᴅ A Sᴇᴀʀᴄʜ Kᴇʏ Aʟᴏɴɢ Wɪᴛʜ Cᴏᴍᴍᴀɴᴅ', context.bot, update)
     buttons = button_build.ButtonMaker()
-    buttons.sbutton("Drive Root", f"types {user_id} root")
-    buttons.sbutton("Recursive", f"types {user_id} recu")
-    buttons.sbutton("Cancel", f"types {user_id} cancel")
+    buttons.sbutton("ᴅʀɪᴠᴇ ʀᴏᴏᴛ", f"types {user_id} root")
+    buttons.sbutton("ʀᴇᴄᴜʀsɪᴠᴇ", f"types {user_id} recu")
+    buttons.sbutton("ᴄᴀɴᴄᴇʟ", f"types {user_id} cancel")
     button = InlineKeyboardMarkup(buttons.build_menu(2))
-    sendMarkup('Choose option to list.', context.bot, update, button)
+    sendMarkup('ᴄʜᴏᴏsᴇ ᴏɴᴇ ᴏғ ᴛʜᴇ ɢɪᴠᴇɴ.', context.bot, update, button)
 
 def select_type(update, context):
     query = update.callback_query
@@ -35,12 +35,12 @@ def select_type(update, context):
     elif data[2] in ["root", "recu"]:
         query.answer()
         buttons = button_build.ButtonMaker()
-        buttons.sbutton("Folders", f"types {user_id} folders {data[2]}")
-        buttons.sbutton("Files", f"types {user_id} files {data[2]}")
-        buttons.sbutton("Both", f"types {user_id} both {data[2]}")
-        buttons.sbutton("Cancel", f"types {user_id} cancel")
+        buttons.sbutton("📂 ғᴏʟᴅᴇʀs", f"types {user_id} folders {data[2]}")
+        buttons.sbutton("📒 ғɪʟᴇs", f"types {user_id} files {data[2]}")
+        buttons.sbutton("🗃️ ʙᴏᴛʜ", f"types {user_id} both {data[2]}")
+        buttons.sbutton("🎗️ ᴄᴀɴᴄᴇʟ", f"types {user_id} cancel")
         button = InlineKeyboardMarkup(buttons.build_menu(2))
-        editMessage('Choose option to list.', msg, button)
+        editMessage('ᴄʜᴏᴏsᴇ ᴏɴᴇ ᴏғ ᴛʜᴇ ɢɪᴠᴇɴ.', msg, button)
     elif data[2] in ["files", "folders", "both"]:
         query.answer()
         list_method = data[3]
@@ -60,7 +60,7 @@ def list_drive(key, bmsg, list_method, item_type):
     if button:
         editMessage(msg, bmsg, button)
     else:
-        editMessage(f'No result found for <i>{key}</i>', bmsg)
+        editMessage(f'Nᴏ ʀᴇsᴜʟᴛ ғᴏᴜɴᴅ Aɴʏᴛʜɪɴɢ Fᴏʀ Sᴇᴀʀᴄʜ Rᴇsᴜʟᴛs Oғ  <i>{key}</i>', bmsg)
 
 
 list_handler = CommandHandler(BotCommands.ListCommand, list_buttons, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
