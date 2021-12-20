@@ -26,7 +26,7 @@ def cloneNode(update, context):
     gdtot_link = is_gdtot_link(link)
     if gdtot_link:
         try:
-            msg = sendMessage(f"Processing: <code>{link}</code>", context.bot, update)
+            msg = sendMessage(f"Pʀᴏᴄᴇssɪɴɢ Yᴏᴜʀ ᴜʀʟ : <code>{link}</code>", context.bot, update)
             link = gdtot(link)
             deleteMessage(context.bot, msg)
         except DirectDownloadLinkException as e:
@@ -39,22 +39,22 @@ def cloneNode(update, context):
             sendMessage(res, context.bot, update)
             return
         if STOP_DUPLICATE:
-            LOGGER.info('Checking File/Folder if already in Drive...')
+            LOGGER.info('Cʜᴇᴄᴋɪɴɢ Fɪʟᴇ / Fᴏʟᴅᴇʀ ɪғ ᴀʟʀᴇᴀᴅʏ ɪɴ Dʀɪᴠᴇ...')
             smsg, button = gd.drive_list(name, True, True)
             if smsg:
-                msg3 = "File/Folder is already available in Drive.\nHere are the search results:"
+                msg3 = "🦉 Fɪʟᴇ/Fᴏʟᴅᴇʀ Is Aʟʀᴇᴀᴅʏ Aᴠᴀɪʟᴀʙʟᴇ Iɴ Dʀɪᴠᴇ. \nHᴇʀᴇ Aʀᴇ Tʜᴇ Aᴠᴀɪʟᴀʙʟᴇ Rᴇsᴜʟᴛs 👇🏼👇🏽"
                 sendMarkup(msg3, context.bot, update, button)
                 if gdtot_link:
                     gd.deletefile(link)
                 return
         if CLONE_LIMIT is not None:
-            LOGGER.info('Checking File/Folder Size...')
+            LOGGER.info('Cʜᴇᴄᴋɪɴɢ Fɪʟᴇ/Fᴏʟᴅᴇʀ Sɪᴢᴇ..')
             if size > CLONE_LIMIT * 1024**3:
                 msg2 = f'Failed, Clone limit is {CLONE_LIMIT}GB.\nYour File/Folder size is {get_readable_file_size(size)}.'
                 sendMessage(msg2, context.bot, update)
                 return
         if files <= 10:
-            msg = sendMessage(f"Cloning: <code>{link}</code>", context.bot, update)
+            msg = sendMessage(f"😾 Cʟᴏɴɪɴɢ Yᴏᴜʀ Rᴇϙᴜᴇsᴛ : <code>{link}</code>", context.bot, update)
             result, button = gd.clone(link)
             deleteMessage(context.bot, msg)
         else:
@@ -82,7 +82,7 @@ def cloneNode(update, context):
         else:
             uname = f'<a href="tg://user?id={update.message.from_user.id}">{update.message.from_user.first_name}</a>'
         if uname is not None:
-            cc = f'\n\n<b>#Cloned by: </b>{uname}'
+            cc = f'\n\n<b>Cʟᴏɴᴇᴅ Bʏ : </b>{uname}'
             men = f'{uname} '
         if button in ["cancelled", ""]:
             sendMessage(men + result, context.bot, update)
@@ -91,16 +91,16 @@ def cloneNode(update, context):
             if LOGS_CHATS:
                 try:
                     for i in LOGS_CHATS:
-                        msg1 = f'<b>File Cloned: </b> <code>{name}</code>\n'
-                        msg1 += f'<b>Cloned by: </b>{uname}\n'
-                        msg1 += f'<b>Size: </b>{get_readable_file_size(size)}\n'
+                        msg1 = f'<b>Fɪʟᴇ Cʟᴏɴᴇᴅ : </b> <code>{name}</code>\n'
+                        msg1 += f'<b>Cʟᴏɴᴇᴅ Bʏ : </b>{uname}\n'
+                        msg1 += f'<b>Sɪᴢᴇ : </b>{get_readable_file_size(size)}\n'
                         bot.sendMessage(chat_id=i, text=msg1, reply_markup=button, parse_mode=ParseMode.HTML)
                 except Exception as e:
                     LOGGER.warning(e)
         if gdtot_link:
             gd.deletefile(link)
     else:
-        sendMessage('Send Gdrive or gdtot link along with command or by replying to the link by command', context.bot, update)
+        sendMessage('👻 Hᴇʏ, Sᴇɴᴅ GDʀɪᴠᴇ ᴏʀ GDTᴏT ʟɪɴᴋ Aʟᴏɴɢ Wɪᴛʜ Cᴏᴍᴍᴀɴᴅ Oʀ Bʏ Rᴇᴘʟʏɪɴɢ Tᴏ Tʜᴇ Lɪɴᴋ Bʏ Cᴏᴍᴍᴀɴᴅ Cᴏʀʀᴇᴄᴛʟʏ ', context.bot, update)
 
 clone_handler = CommandHandler(BotCommands.CloneCommand, cloneNode, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user)
 dispatcher.add_handler(clone_handler)
