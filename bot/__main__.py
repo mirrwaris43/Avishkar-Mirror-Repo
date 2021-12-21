@@ -62,13 +62,13 @@ def stats(update, context):
 
 def start(update, context):
     buttons = button_build.ButtonMaker()
-    buttons.buildbutton("Group 👥", "https://t.me/GroupEmpireOT")
-    buttons.buildbutton("Channel 🌟", "https://t.me/EmpireMirror")
+    buttons.buildbutton("𝙈𝙮 𝙁𝙖𝙩𝙝𝙚𝙧 🤵‍♂️", "https://t.me/AvishkarPatil")
+    buttons.buildbutton("𝙈𝙮 𝙃𝙤𝙢𝙚 🏡", "https://GitHub.com/avipatilpro")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
-This bot can mirror all your links to Google Drive!
-Type /{BotCommands.HelpCommand} to get a list of available commands
+𝙸'𝚖 𝙻𝚘𝚢𝚊𝚕 𝙳𝚊𝚞𝚐𝚑𝚝𝚎𝚛 💁🏻‍♀️ 𝙾𝚏 𝙼𝚢 𝙵𝚊𝚝𝚑𝚎𝚛, 𝙺𝚗𝚘𝚠𝚗 𝙰𝚜 𝙼𝚒𝚛𝚛𝚘𝚛 𝙱𝚘𝚝 \n
+🤗 𝚈𝚘𝚞 𝚆𝚊𝚗𝚝 𝚃𝚘 𝙺𝚗𝚘𝚠 𝙷𝚘𝚠 𝚃𝚘 𝚄𝚜𝚎 𝙼𝚎 ? 𝙲𝚕𝚒𝚌𝚔 /{BotCommands.HelpCommand} 𝙵𝚘𝚛 𝚂𝚘𝚖𝚎 𝙶𝚞𝚒𝚍𝚎𝚕𝚒𝚗𝚎.
 '''
         sendMarkup(start_string, context.bot, update, reply_markup)
     else:
@@ -163,7 +163,7 @@ help_string_telegraph = f'''<br>
 '''
 
 help = telegraph.create_page(
-        title='Empire-Mirror Help',
+        title='AviMirror Help',
         content=help_string_telegraph,
     )["path"]
 
@@ -240,11 +240,11 @@ def main():
     if os.path.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("♻️ 𝐁𝐎𝐓 𝐆𝐎𝐓 𝐑𝐄𝐒𝐓𝐀𝐑𝐓𝐄𝐃 ♻️\n\n𝙿𝙻𝙴𝙰𝚂𝙴 𝚁𝙴-𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙰𝙶𝙰𝙸𝙽!", chat_id, msg_id)
+        bot.edit_message_text("𝙶𝚘𝚘𝚍 𝙽𝚒𝚐𝚑𝚝 𝙱𝚛𝚘 🌃\n\n𝙿𝙻𝙴𝙰𝚂𝙴 𝚁𝙴-𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙰𝙶𝙰𝙸𝙽!", chat_id, msg_id)
         os.remove(".restartmsg")
     elif OWNER_ID:
         try:
-            text = "<b>♻️ 𝐁𝐎𝐓 𝐆𝐎𝐓 𝐑𝐄𝐒𝐓𝐀𝐑𝐓𝐄𝐃 ♻️</b>"
+            text = "<b>𝙶𝚘𝚘𝚍 𝙽𝚒𝚐𝚑𝚝 𝙱𝚛𝚘 🌃</b>"
             bot.sendMessage(chat_id=OWNER_ID, text=text, parse_mode=ParseMode.HTML)
             if AUTHORIZED_CHATS:
                 for i in AUTHORIZED_CHATS:
