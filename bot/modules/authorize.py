@@ -86,7 +86,7 @@ def unauthorize(update, context):
                 AUTHORIZED_CHATS.remove(user_id)
                 msg = 'ᴛᴇʀɪ ᴘᴏᴡᴇʀ ᴡᴀᴘɪs ʟᴇ ʀᴀʜᴀ ʜᴜ ᴍᴀɪ'
         else:
-            msg = 'ɪsᴋᴇ ᴘᴀss ᴋᴏɪ ᴘᴏᴡᴇʀ ɴᴀʜɪ ʜᴀɪ''
+            msg = 'ɪsᴋᴇ ᴘᴀss ᴋᴏɪ ᴘᴏᴡᴇʀ ɴᴀʜɪ ʜᴀɪ'
     with open('authorized_chats.txt', 'a') as file:
         file.truncate(0)
         for i in AUTHORIZED_CHATS:
