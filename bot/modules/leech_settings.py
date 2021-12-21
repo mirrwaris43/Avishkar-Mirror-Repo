@@ -41,9 +41,9 @@ def getleechinfo(from_user):
 
     button = InlineKeyboardMarkup(buttons.build_menu(1))
 
-    text = f"<u>Leech Settings for <a href='tg://user?id={user_id}'>{name}</a></u>\n"\
-           f"Leech Type <b>{ltype}</b>\n"\
-           f"Custom Thumbnail <b>{thumbmsg}</b>"
+    text = f"<u>ʟᴇᴇᴄʜ sᴇᴛᴛɪɴɢs ғᴏʀ <a href='tg://user?id={user_id}'>{name}</a></u>\n"\
+           f"ʟᴇᴇᴄʜ ᴛʏᴘᴇ <b>{ltype}</b>\n"\
+           f"ᴄᴜsᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ <b>{thumbmsg}</b>"
     return text, button
 
 def editLeechType(message, query):
@@ -62,27 +62,27 @@ def setLeechType(update, context):
     data = query.data
     data = data.split(" ")
     if user_id != int(data[1]):
-        query.answer(text="Not Yours!", show_alert=True)
+        query.answer(text="ɴᴏᴛ ʏᴏᴜʀs!", show_alert=True)
     elif data[0] == "doc":
         if user_id in AS_MEDIA_USERS:
             AS_MEDIA_USERS.remove(user_id)
         AS_DOC_USERS.add(user_id)
-        query.answer(text="Your File Will Deliver As Document!", show_alert=True)
+        query.answer(text="Yᴏᴜʀ Fɪʟᴇ Wɪʟʟ Dᴇʟɪᴠᴇʀ As Dᴏᴄᴜᴍᴇɴᴛ!", show_alert=True)
         editLeechType(message, query)
     elif data[0] == "med":
         if user_id in AS_DOC_USERS:
             AS_DOC_USERS.remove(user_id)
         AS_MEDIA_USERS.add(user_id)
-        query.answer(text="Your File Will Deliver As Media!", show_alert=True)
+        query.answer(text="Yᴏᴜʀ Fɪʟᴇ Wɪʟʟ Dᴇʟɪᴠᴇʀ As Mᴇᴅɪᴀ!", show_alert=True)
         editLeechType(message, query)
     elif data[0] == "thumb":
         path = f"Thumbnails/{user_id}.jpg"
         if os.path.lexists(path):
             os.remove(path)
-            query.answer(text="Thumbnail Removed!", show_alert=True)
+            query.answer(text="Tʜᴜᴍʙɴᴀɪʟ Rᴇᴍᴏᴠᴇᴅ!", show_alert=True)
             editLeechType(message, query)
         else:
-            query.answer(text="Old Settings", show_alert=True)
+            query.answer(text="Oʟᴅ Sᴇᴛᴛɪɴɢs", show_alert=True)
     elif data[0] == "closeset":
         try:
             query.message.delete()
@@ -102,9 +102,9 @@ def setThumb(update, context):
         des_dir = os.path.join(path, str(user_id) + ".jpg")
         Image.open(photo_dir).convert("RGB").save(des_dir, "JPEG")
         os.remove(photo_dir)
-        sendMessage(f"Custom thumbnail saved for <a href='tg://user?id={user_id}'>{update.message.from_user.full_name}</a> .", context.bot, update)
+        sendMessage(f"Cᴜsᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ sᴀᴠᴇᴅ ғᴏʀ  <a href='tg://user?id={user_id}'>{update.message.from_user.full_name}</a> .", context.bot, update)
     else:
-        sendMessage("Reply to a photo to save custom thumbnail.", context.bot, update)
+        sendMessage("Rᴇᴘʟʏ ᴛᴏ ᴀ ᴘʜᴏᴛᴏ ᴛᴏ sᴀᴠᴇ ᴄᴜsᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ..", context.bot, update)
 
 leech_set_handler = CommandHandler(BotCommands.LeechSetCommand, leechSet, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 set_thumbnail_handler = CommandHandler(BotCommands.SetThumbCommand, setThumb, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
