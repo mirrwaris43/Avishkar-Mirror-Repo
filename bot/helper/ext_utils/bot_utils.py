@@ -126,8 +126,8 @@ def get_readable_message():
                 globals()['PAGE_NO'] -= 1
             START = COUNT
         for index, download in enumerate(list(download_dict.values())[START:], start=1):
-            msg += f"<b>📦 Fɪʟᴇ Nᴀᴍᴇ:</b> <code>{download.name()}</code>"
-            msg += f"\n\n<b>⚙️ Sᴛᴀᴛᴜs:</b> <i>{download.status()}</i>\n"
+            msg += f"<b>📦 Fɪʟᴇ Nᴀᴍᴇ :</b> <code>{download.name()}</code>"
+            msg += f"\n<b>⚙️ Sᴛᴀᴛᴜs :</b> <i>{download.status()}</i>\n"
             if download.status() not in [
                 MirrorStatus.STATUS_ARCHIVING,
                 MirrorStatus.STATUS_EXTRACTING,
@@ -138,9 +138,9 @@ def get_readable_message():
                 if download.status() == MirrorStatus.STATUS_CLONING:
                     msg += f"\n<b>Cʟᴏɴᴇᴅ :</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                 elif download.status() == MirrorStatus.STATUS_UPLOADING:
-                    msg += f"\n<b>📤 Uᴘʟᴏᴅᴇᴅ :</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
+                    msg += f"\n\n<b>📤 Uᴘʟᴏᴅᴇᴅ :</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                 else:
-                    msg += f"\n<b>📥 Dᴏᴡɴʟᴏᴀᴅᴇᴅ :</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
+                    msg += f"\n\n<b>📥 Dᴏᴡɴʟᴏᴀᴅᴇᴅ :</b> {get_readable_file_size(download.processed_bytes())} of {download.size()}"
                 msg += f"\n<b>🚀 Sᴘᴇᴇᴅ :</b> {download.speed()} | <b>⏳ ᴇᴛᴀ :</b> {download.eta()}"
                 try:
                     msg += f"\n<b>🌱 Sᴇᴇᴅᴇʀs :</b> {download.aria_download().num_seeders}" \
