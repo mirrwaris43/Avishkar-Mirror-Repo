@@ -124,7 +124,7 @@ def search(key, site, message, tool):
             return editMessage(f"No result found for <i>{key}</i>\nTorrent Site:- <i>{site.capitalize()}</i>", message)
     link = getResult(search_results, key, message, tool)
     buttons = button_build.ButtonMaker()
-    buttons.buildbutton("🔎 VIEW", link)
+    buttons.buildbutton("ðŸ”Ž VIEW", link)
     button = InlineKeyboardMarkup(buttons.build_menu(1))
     editMessage(msg, message, button)
     if tool != 'api':
@@ -176,7 +176,7 @@ def getResult(search_results, key, message, tool):
 
     editMessage(f"<b>Creating</b> {len(telegraph_content)} <b>Telegraph pages.</b>", message)
     path = [telegraph.create_page(
-                title='Empire-Mirror Torrent Search',
+                title='AviMirror Torrent Search',
                 content=content
             )["path"] for content in telegraph_content]
     time.sleep(0.5)
@@ -202,7 +202,7 @@ def edit_telegraph(path, telegraph_content):
                 nxt_page += 1
         telegraph.edit_page(
             path = path[prev_page],
-            title = 'Empire-Mirror Torrent Search',
+            title = 'AviMirror Torrent Search',
             content=content
         )
     return
