@@ -67,7 +67,7 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onDownloadComplete(self):
         with download_dict_lock:
-            LOGGER.info(f"Download completed: {download_dict[self.uid].name()}")
+            LOGGER.info(f"∂σωɳℓσα∂ cσɱρℓεƭε∂ : {download_dict[self.uid].name()}")
             download = download_dict[self.uid]
             name = str(download.name()).replace('/', '')
             gid = download.gid()
@@ -196,7 +196,7 @@ class MirrorListener(listeners.MirrorListeners):
             uname = f"@{self.message.from_user.username}"
         else:
             uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
-        msg = f"{uname} your download has been stopped due to: {error}"
+        msg = f"{uname} Yᴏᴜʀ Dᴏᴡɴʟᴏᴀᴅ Hᴀs Bᴇᴇɴ Sᴛᴏᴘᴘᴇᴅ Dᴜᴇ Tᴏ: {error}"
         sendMessage(msg, self.bot, self.update)
         if count == 0:
             self.clean()
@@ -217,9 +217,9 @@ class MirrorListener(listeners.MirrorListeners):
                 uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
             count = len(files)
             msg = f'<b>Name: </b><code>{link}</code>\n\n'
-            msg += f'<b>Total Files: </b>{count}'
+            msg += f'<b>Tᴏᴛᴀʟ Fɪʟᴇs : </b>{count}'
             if typ != 0:
-                msg += f'\n<b>Corrupted Files: </b>{typ}'
+                msg += f'\n<b>Cᴏʀʀᴜᴘᴛᴇᴅ Fɪʟᴇs :  </b>{typ}'
             if self.message.chat.type == 'private':
                 sendMessage(msg, self.bot, self.update)
             else:
@@ -254,29 +254,29 @@ class MirrorListener(listeners.MirrorListeners):
                 return
 
         with download_dict_lock:
-            msg = f'<b>Name: </b><code>{download_dict[self.uid].name()}</code>\n\n<b>Size: </b>{size}'
-            msg += f'\n\n<b>Type: </b>{typ}'
+            msg = f'<b>📂 ғɪʟᴇɴᴀᴍᴇ : </b><code>{download_dict[self.uid].name()}</code>\n\n<b>Size: </b>{size}'
+            msg += f'\n\n<b>🕯️ᴛʏᴘᴇ : </b>{typ}'
             if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
-                msg += f'\n<b>SubFolders: </b>{folders}'
-                msg += f'\n<b>Files: </b>{files}'
+                msg += f'\n<b>📦 sᴜʙғᴏʟᴅᴇʀs: </b>{folders}'
+                msg += f'\n<b>🔥 ғɪʟᴇs: </b>{files}'
             buttons = button_build.ButtonMaker()
             link = short_url(link)
-            buttons.buildbutton("☁️ Drive Link", link)
-            LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
+            buttons.buildbutton("☁️ ∂яινє ℓιиκ ", link)
+            LOGGER.info(f'Dᴏɴᴇ Uᴘʟᴏᴀᴅɪɴɢ {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 url_path = requests.utils.quote(f'{download_dict[self.uid].name()}')
                 share_url = f'{INDEX_URL}/{url_path}'
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
                     share_url = short_url(share_url)
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("⚡ ιи∂єϰ ℓιиκ", share_url)
                 else:
                     share_url = short_url(share_url)
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("⚡ ιи∂єϰ ℓιиκ", share_url)
                     if VIEW_LINK:
                         share_urls = f'{INDEX_URL}/{url_path}?a=view'
                         share_urls = short_url(share_urls)
-                        buttons.buildbutton("🌐 View Link", share_urls)
+                        buttons.buildbutton("🎃 νιєω ℓιиκ", share_urls)
             if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
                 buttons.buildbutton(f"{BUTTON_FOUR_NAME}", f"{BUTTON_FOUR_URL}")
             if BUTTON_FIVE_NAME is not None and BUTTON_FIVE_URL is not None:
@@ -288,13 +288,13 @@ class MirrorListener(listeners.MirrorListeners):
             else:
                 uname = f'<a href="tg://user?id={self.message.from_user.id}">{self.message.from_user.first_name}</a>'
             if uname is not None:
-                msg += f'\n\n<b>#Uploded by: </b>{uname}'
+                msg += f'\n\n<b>ᴜᴘʟᴏᴀᴅᴇᴅ ʙʏ : </b>{uname}'
                 if LOGS_CHATS:
                     try:
                         for i in LOGS_CHATS:
-                            msg1 = f'<b>File Uploaded: </b> <code>{download_dict[self.uid].name()}</code>\n'
-                            msg1 += f'<b>By: </b>{uname}\n'
-                            msg1 += f'<b>Size: </b>{size}\n'
+                            msg1 = f'<b>📂 ғɪʟᴇ ᴜᴘʟᴏᴀᴅᴇᴅ : </b> <code>{download_dict[self.uid].name()}</code>\n'
+                            msg1 += f'<b>😾 ʙʏ  : </b>{uname}\n'
+                            msg1 += f'<b>⚙️ ғɪʟᴇ sɪᴢᴇ : </b>{size}\n'
                             bot.sendMessage(chat_id=i, text=msg1, reply_markup=InlineKeyboardMarkup(buttons.build_menu(2)), parse_mode=ParseMode.HTML)
                     except Exception as e:
                         LOGGER.warning(e)  
@@ -406,14 +406,14 @@ def _mirror(bot, update, isZip=False, extract=False, isQbit=False, isLeech=False
     gdtot_link = bot_utils.is_gdtot_link(link)
 
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link) and not os.path.exists(link):
-        help_msg = "<b>Send link along with command line:</b>"
-        help_msg += "\n<code>/command</code> {link} |newname pswd: mypassword [𝚣𝚒𝚙/𝚞𝚗𝚣𝚒𝚙]"
-        help_msg += "\n\n<b>By replying to link or file:</b>"
-        help_msg += "\n<code>/command</code> |newname pswd: mypassword [𝚣𝚒𝚙/𝚞𝚗𝚣𝚒𝚙]"
-        help_msg += "\n\n<b>Direct link authorization:</b>"
-        help_msg += "\n<code>/command</code> {link} |newname pswd: mypassword\nusername\npassword"
-        help_msg += "\n\n<b>Qbittorrent selection:</b>"
-        help_msg += "\n<code>/qbcommand</code> <b>s</b> {link} or by replying to {file}"
+        help_msg = "<b>ѕєи∂ ℓιиκ αℓοиg ωιτн ϲοммαи∂ ℓιиє :</b>"
+        help_msg += "\n<code>/ᴄᴏᴍᴍᴀɴᴅ</code>  {ʟɪɴᴋ} |ɴᴇᴡɴᴀᴍᴇ ᴘsᴡᴅ: ᴍʏᴘᴀssᴡᴏʀᴅ [𝚣𝚒𝚙/𝚞𝚗𝚣𝚒𝚙]"
+        help_msg += "\n\n<b>ϐγ яєρℓγιиg το ℓιиκ οя ƒιℓє :</b>"
+        help_msg += "\n<code>/ᴄᴏᴍᴍᴀɴᴅ</code> |ɴᴇᴡɴᴀᴍᴇ ᴘsᴡᴅ: ᴍʏᴘᴀssᴡᴏʀᴅ [𝚣𝚒𝚙/𝚞𝚗𝚣𝚒𝚙]"
+        help_msg += "\n\n<b>∂ιяєϲτ ℓιиκ αυτнοяιzατιοи :</b>"
+        help_msg += "\n<code>/ᴄᴏᴍᴍᴀɴᴅ</code> {ʟɪɴᴋ} |ɴᴇᴡɴᴀᴍᴇ ᴘsᴡᴅ: ᴍʏᴘᴀssᴡᴏʀᴅ\ɴᴜsᴇʀɴᴀᴍᴇ\ɴᴘᴀssᴡᴏʀᴅ"
+        help_msg += "\n\n<b>գϐιττοяяєиτ ѕєℓєϲτιοи :</b>"
+        help_msg += "\n<code>/ϙʙᴄᴏᴍᴍᴀɴᴅ</code> <b>s</b> {ʟɪɴᴋ} ᴏʀ ʙʏ ʀᴇᴘʟʏɪɴɢ ᴛᴏ {ғɪʟᴇ}"
         return sendMessage(help_msg, bot, update)
     elif not bot_utils.is_mega_link(link) and not isQbit and not bot_utils.is_magnet(link) \
          and not os.path.exists(link) and not bot_utils.is_gdrive_link(link):
@@ -431,7 +431,7 @@ def _mirror(bot, update, isZip=False, extract=False, isQbit=False, isLeech=False
                 open(file_name, "wb").write(resp.content)
                 link = f"{file_name}"
             else:
-                sendMessage(f"ERROR: link got HTTP response: {resp.status_code}", bot, update)
+                sendMessage(f"ᴇʀʀᴏʀ: ʟɪɴᴋ ɢᴏᴛ ʜᴛᴛᴘ ʀᴇsᴘᴏɴsᴇ: {resp.status_code}", bot, update)
                 return
         except Exception as e:
             LOGGER.error(str(e))
@@ -439,9 +439,9 @@ def _mirror(bot, update, isZip=False, extract=False, isQbit=False, isLeech=False
 
     if bot_utils.is_gdrive_link(link):
         if not isZip and not extract and not isLeech:
-            gmsg = f"Use /{BotCommands.CloneCommand} to clone Google Drive file/folder\n\n"
-            gmsg += f"Use /{BotCommands.ZipMirrorCommand} to make zip of Google Drive folder\n\n"
-            gmsg += f"Use /{BotCommands.UnzipMirrorCommand} to extracts Google Drive archive file"
+            gmsg = f"Usᴇ /{BotCommands.CloneCommand} ᴛᴏ ᴄʟᴏɴᴇ ɢᴏᴏɢʟᴇ ᴅʀɪᴠᴇ ғɪʟᴇ/ғᴏʟᴅᴇʀ\n\n"
+            gmsg += f"Usᴇ /{BotCommands.ZipMirrorCommand} ᴛᴏ ᴍᴀᴋᴇ ᴢɪᴘ ᴏғ ɢᴏᴏɢʟᴇ ᴅʀɪᴠᴇ ғᴏʟᴅᴇʀ\n\n"
+            gmsg += f"Usᴇ /{BotCommands.UnzipMirrorCommand} ᴛᴏ ᴇxᴛʀᴀᴄᴛs ɢᴏᴏɢʟᴇ ᴅʀɪᴠᴇ ᴀʀᴄʜɪᴠᴇ ғɪʟᴇ"
             sendMessage(gmsg, bot, update)
             return
         gd_dl = GdDownloadHelper()
@@ -449,11 +449,11 @@ def _mirror(bot, update, isZip=False, extract=False, isQbit=False, isLeech=False
 
     elif bot_utils.is_mega_link(link):
         if BLOCK_MEGA_LINKS:
-            sendMessage("Mega links are blocked!", bot, update)
+            sendMessage("ᴍᴇɢᴀ ʟɪɴᴋs ᴀʀᴇ ʙʟᴏᴄᴋᴇᴅ!", bot, update)
             return
         link_type = bot_utils.get_mega_link_type(link)
         if link_type == "folder" and BLOCK_MEGA_FOLDER:
-            sendMessage("Mega folder are blocked!", bot, update)
+            sendMessage("ᴍᴇɢᴀ ғᴏʟᴅᴇʀ ᴀʀᴇ ʙʟᴏᴄᴋᴇᴅ!", bot, update)
         else:
             mega_dl = MegaDownloadHelper()
             mega_dl.add_download(link, f'{DOWNLOAD_DIR}{listener.uid}/', listener)
